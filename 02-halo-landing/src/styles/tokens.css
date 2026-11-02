@@ -1,0 +1,77 @@
+/*
+ * HALO design tokens — mirrored 1:1 from the Figma variables
+ * (file "HALO — Smart Desk Lamp Landing Page").
+ *
+ * The page is a fixed composition of dark and light sections, so there is no
+ * OS-level dark theme: the "dark" tokens below are used by the dark sections.
+ */
+
+:root {
+  /* Colour */
+  --color-bg-canvas: #f7f6f2;
+  --color-bg-sunken: #efede7;
+  --color-bg-raised: #ffffff;
+  --color-bg-dark: #171918;
+  --color-bg-dark-raised: #222523;
+
+  --color-text-primary: #171717;
+  --color-text-secondary: #77766f;
+  --color-text-on-dark: #f7f6f2;
+  --color-text-on-dark-secondary: #a3a29b;
+
+  --color-border-default: #e5e3dc;
+  --color-border-dark: #2e312f;
+
+  --color-accent-default: #e9a94b;
+  --color-accent-soft: #f6e3c4;
+
+  /* Light temperatures used by the lamp and the scale */
+  --temp-warm: #ffb45c;
+  --temp-neutral: #ffe0a8;
+  --temp-cool: #d3e4ff;
+
+  /* Typography */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* Spacing */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-96: 96px;
+  --space-128: 128px;
+  --space-160: 160px;
+
+  /* Page gutter: 24 mobile · 48 tablet · up to 96 desktop */
+  --gutter: 24px;
+
+  /* Radius */
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Focus ring: dark on light sections, amber on dark sections */
+  --focus-ring: var(--color-text-primary);
+
+  color-scheme: light;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 48px;
+  }
+}
+
+@media (min-width: 75rem) {
+  :root {
+    --gutter: clamp(48px, 6.667vw, 96px);
+  }
+}

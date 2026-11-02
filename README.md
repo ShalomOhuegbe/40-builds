@@ -7,7 +7,7 @@ A design engineering build-in-public challenge: 40 small, carefully crafted proj
 | # | Project | Live | Status |
 | --- | --- | --- | --- |
 | 01 | [Word Puzzle](./01-word-puzzle) | — | 🚧 In progress |
-| 02 | _TBA_ | — | ⏳ Planned |
+| 02 | [HALO Landing Page](./02-halo-landing) | Deploy pending | ✅ Built |
 | 03 | _TBA_ | — | ⏳ Planned |
 | 04 | _TBA_ | — | ⏳ Planned |
 | 05 | _TBA_ | — | ⏳ Planned |
@@ -47,7 +47,7 @@ A design engineering build-in-public challenge: 40 small, carefully crafted proj
 | 39 | _TBA_ | — | ⏳ Planned |
 | 40 | _TBA_ | — | ⏳ Planned |
 
-**Status key:** ⏳ Planned · 🚧 In progress · ✅ Live
+**Status key:** ⏳ Planned · 🚧 In progress · ✅ Built · 🌐 Live
 
 ## Working in this repo
 
