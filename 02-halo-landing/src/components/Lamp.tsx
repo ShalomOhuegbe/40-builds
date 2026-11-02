@@ -24,6 +24,41 @@ export function Lamp({ temperature, className = '' }: Props) {
   )
 }
 
+// Light region of the lamp artwork (cone + desk pool), as % of the SVG's
+// 244.8×217.6 viewBox: cone 152→204 at the head, 102→224 at the desk; the
+// pool starts at x 40% so the base plate and its shadow stay in the body layer.
+const LIGHT_POINTS = '61.5% 19%, 84% 19%, 91.5% 91.4%, 100% 91.4%, 100% 98%, 40% 98%, 40% 91.4%, 42.5% 91.4%'
+const LIGHT_CLIP = `polygon(${LIGHT_POINTS})`
+const BODY_CLIP = `polygon(evenodd, -10% -10%, 110% -10%, 110% 110%, -10% 110%, -10% -10%, ${LIGHT_POINTS}, 61.5% 19%)`
+
+// Hero lamp: the same Figma asset split into a static body (arm, head, base)
+// and a light layer that powers on with a soft LED flicker, then breathes.
+export function HeroLamp({ className = '' }: { className?: string }) {
+  const reduceMotion = useReducedMotion()
+  const imgClass = 'absolute inset-y-0 left-0 block h-full w-[112.5%] max-w-none'
+
+  return (
+    <div className={`pointer-events-none absolute aspect-square ${className}`} aria-hidden="true">
+      <img src={lampWarm} alt="" className={imgClass} style={{ clipPath: BODY_CLIP }} />
+      <motion.div
+        className="absolute inset-0"
+        animate={reduceMotion ? undefined : { opacity: [1, 0.78, 1] }}
+        transition={{ duration: 6, delay: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <motion.img
+          src={lampWarm}
+          alt=""
+          className={imgClass}
+          style={{ clipPath: LIGHT_CLIP }}
+          initial={reduceMotion ? false : { opacity: 0 }}
+          animate={{ opacity: reduceMotion ? 1 : [0, 0.65, 0.15, 0.9, 0.55, 1] }}
+          transition={{ duration: 1.6, delay: 0.5, times: [0, 0.18, 0.3, 0.5, 0.65, 1], ease: 'easeOut' }}
+        />
+      </motion.div>
+    </div>
+  )
+}
+
 // Stacks all three temperature variants and crossfades between them (400ms).
 // plus-lighter makes identical pixels (the aluminium arm) add back up to 100%,
 // so only the light colour shifts: no dip in the arm mid-fade.

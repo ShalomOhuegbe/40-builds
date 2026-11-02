@@ -1,16 +1,38 @@
+import type { PointerEvent } from 'react'
+import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion'
 import { Button } from './Button'
-import { Lamp } from './Lamp'
+import { HeroLamp } from './Lamp'
 import { SpecTicker } from './SpecTicker'
 import glow from '../assets/figma/hero-glow.svg'
 import dot from '../assets/figma/dot-amber-8.svg'
 
+const spring = { stiffness: 60, damping: 20 }
+
 // Geometry from the 390 / 768 / 1440 frames. The "scene" is the strip between
 // the copy and the desk; the lamp's contact line sits on its bottom edge.
 export function Hero() {
+  const reduceMotion = useReducedMotion()
+  // Ambient glow drifts towards a mouse pointer (±40px / ±24px)
+  const glowX = useSpring(useMotionValue(0), spring)
+  const glowY = useSpring(useMotionValue(0), spring)
+
+  const onPointerMove = (event: PointerEvent<HTMLElement>) => {
+    if (reduceMotion || event.pointerType !== 'mouse') return
+    const rect = event.currentTarget.getBoundingClientRect()
+    glowX.set(((event.clientX - rect.left) / rect.width - 0.5) * 80)
+    glowY.set(((event.clientY - rect.top) / rect.height - 0.5) * 48)
+  }
+  const onPointerLeave = () => {
+    glowX.set(0)
+    glowY.set(0)
+  }
+
   return (
     <section
       id="top"
       aria-labelledby="hero-title"
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
       className="on-dark-surface relative overflow-hidden bg-dark pt-[104px] md:pt-[140px] lg:pt-[196px]"
     >
       <div className="shell relative z-10">
@@ -54,13 +76,28 @@ export function Hero() {
 
       {/* Scene: glow + lamp, anchored to the desk line */}
       <div className="shell relative h-[390px] md:h-[359px] lg:h-[50px]">
-        <img
-          src={glow}
-          alt=""
-          className="pointer-events-none absolute right-[-234px] bottom-[103px] h-[468px] w-[546px] max-w-none md:right-[-396px] md:bottom-[40px] md:h-[900px] md:w-[1000px] lg:right-[-220px] lg:bottom-[30px] lg:w-[1100px]"
-        />
-        <Lamp
-          temperature="warm"
+        <motion.div
+          style={{ x: glowX, y: glowY }}
+          className="pointer-events-none absolute right-[-234px] bottom-[103px] h-[468px] w-[546px] md:right-[-396px] md:bottom-[40px] md:h-[900px] md:w-[1000px] lg:right-[-220px] lg:bottom-[30px] lg:w-[1100px]"
+        >
+          {/* Fades in with the lamp's power-on, then breathes with the light */}
+          <motion.img
+            src={glow}
+            alt=""
+            className="size-full max-w-none"
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: [0, 1, 0.8, 1], scale: [1, 1, 1.05, 1] }}
+            transition={
+              reduceMotion
+                ? undefined
+                : {
+                    opacity: { duration: 1.6, delay: 0.6, times: [0, 0.6, 0.8, 1] },
+                    scale: { duration: 6, delay: 2.2, repeat: Infinity, ease: 'easeInOut' },
+                  }
+            }
+          />
+        </motion.div>
+        <HeroLamp
           className="right-[-60px] bottom-[-22.3px] w-[396.8px] md:right-[-40px] md:bottom-[-32.4px] md:w-[576px] lg:right-[-20px] lg:bottom-[calc(min(716.8px,49.78vw)*-0.05625)] lg:w-[min(716.8px,49.78vw)]"
         />
       </div>
