@@ -78,6 +78,8 @@ export function Hero() {
       <div className="shell relative h-[390px] md:h-[359px] lg:h-[50px]">
         <motion.div
           style={{ x: glowX, y: glowY }}
+          animate={reduceMotion ? undefined : { opacity: [1, 0.55, 1] }}
+          transition={{ duration: 4, delay: 2.2, repeat: Infinity, ease: 'easeInOut' }}
           className="pointer-events-none absolute right-[-234px] bottom-[103px] h-[468px] w-[546px] md:right-[-396px] md:bottom-[40px] md:h-[900px] md:w-[1000px] lg:right-[-220px] lg:bottom-[30px] lg:w-[1100px]"
         >
           {/* Fades in with the lamp's power-on, then breathes with the light */}
@@ -86,13 +88,13 @@ export function Hero() {
             alt=""
             className="size-full max-w-none"
             initial={reduceMotion ? false : { opacity: 0 }}
-            animate={reduceMotion ? { opacity: 1 } : { opacity: [0, 1, 0.8, 1], scale: [1, 1, 1.05, 1] }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: [0, 1, 0.8, 1], scale: [1, 1.12, 1] }}
             transition={
               reduceMotion
                 ? undefined
                 : {
                     opacity: { duration: 1.6, delay: 0.6, times: [0, 0.6, 0.8, 1] },
-                    scale: { duration: 6, delay: 2.2, repeat: Infinity, ease: 'easeInOut' },
+                    scale: { duration: 4, delay: 2.2, repeat: Infinity, ease: 'easeInOut' },
                   }
             }
           />
