@@ -12,7 +12,7 @@ A design engineering build-in-public challenge: 40 small, polished projects.
 
 ## Stack
 
-Vite, React 18, TypeScript (strict), Tailwind CSS v4, Framer Motion, lucide-react. Styling flows from `src/styles/tokens.css` — use tokens, not hard-coded values. Deployed to Vercel with each build folder as its own project root.
+Vite, React 18, TypeScript (strict), Tailwind CSS v4, Framer Motion, lucide-react. Styling flows from `src/styles/tokens.css` — use tokens, not hard-coded values. All builds deploy together as one Vercel project from the repo root (`npm run build`), each served at `/NN-slug/`. Use relative or imported asset paths so a build works under its path.
 
 ## Design rules
 

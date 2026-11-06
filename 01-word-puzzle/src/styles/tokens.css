@@ -1,98 +1,119 @@
 /*
- * Design tokens for this build.
- * Replace the palette and font stacks to give the project its own identity.
- * Light is the default; dark applies via OS preference or [data-theme="dark"].
+ * Krak design tokens, mirrored from the Figma variables and Foundations page.
+ * The design defines one light theme plus a high-contrast mode (below).
  */
 
 :root {
-  /* Colour — warm neutral starter palette (AA-checked pairs) */
-  --color-bg: #f6f2ea;
-  --color-surface: #fffdf8;
-  --color-surface-raised: #ffffff;
-  --color-text: #1c1a17;
-  --color-text-muted: #5c564c;
-  --color-border: #d9d1c3;
-  --color-accent: #b4441c;
-  --color-accent-contrast: #ffffff;
-  --color-success: #2f6b3a;
-  --color-warning: #8a5a00;
-  --color-danger: #a61b29;
-  --color-focus: #1f5fbf;
+  /* Base */
+  --base-ink: #0e0f0c;
+  --base-ink-2: #45483f;
+  --base-ink-3: #6b6e65;
+  --base-bg: #f2f3ee;
+  --base-surface: #ffffff;
+  --base-surface-2: #e4e5de;
+  --base-line: #d3d5cc;
+
+  /* Brand */
+  --brand-lime: #c6f432;
+  --brand-lime-deep: #97c40b;
+  --brand-lime-tint: #f0fbcb;
+  --brand-cobalt: #2b45f5;
+  --brand-cobalt-deep: #1a2fc2;
+  --brand-cobalt-tint: #e4e8ff;
+
+  /* Game states */
+  --state-correct: var(--brand-lime);
+  --state-correct-ink: var(--base-ink);
+  --state-correct-line: var(--brand-lime-deep);
+  --state-present: var(--brand-cobalt);
+  --state-present-ink: #ffffff;
+  --state-present-line: var(--brand-cobalt-deep);
+  --state-absent: #e4e5de;
+  --state-absent-ink: #5c5f57;
+  --state-error: #f2412a;
+  --state-error-tint: #ffe9e5;
 
   /* Typography */
-  --font-display: ui-serif, Georgia, 'Times New Roman', serif;
-  --font-body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
-
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.375rem;
-  --text-2xl: 1.75rem;
-  --text-3xl: clamp(2rem, 6vw, 3rem);
-  --text-display: clamp(2.5rem, 10vw, 5rem);
-
-  --leading-tight: 1.1;
-  --leading-normal: 1.55;
-  --tracking-tight: -0.02em;
-  --tracking-wide: 0.08em;
-
-  /* Spacing — 4px base */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-7: 3rem;
-  --space-8: 4rem;
-  --space-gutter: clamp(1rem, 4vw, 2rem);
+  --font-display: 'Unbounded', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
 
   /* Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 12px;
   --radius-lg: 16px;
-  --radius-pill: 999px;
+  --radius-xl: 24px;
+
+  /* Elevation */
+  --shadow-key: 0 2px 0 0 rgba(14, 15, 12, 0.14);
+  --shadow-card: 0 12px 32px -8px rgba(14, 15, 12, 0.08), 0 1px 2px 0 rgba(14, 15, 12, 0.06);
+  --shadow-modal: 0 32px 64px -16px rgba(14, 15, 12, 0.22);
+  --shadow-hard: 4px 4px 0 0 var(--base-ink);
+  --shadow-hard-hover: 6px 6px 0 0 var(--base-ink);
+  --glow-tile: 0 0 12px rgba(198, 244, 50, 0.55);
+  --glow-win: 0 0 24px rgba(198, 244, 50, 0.55);
+  --scrim: rgba(14, 15, 12, 0.42);
 
   /* Motion */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --duration-fast: 120ms;
-  --duration-base: 220ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Borders */
+  --tile-border: 2px;
+
+  /* Board + keyboard sizing: mobile. min(58, (vw − 40 − 24) / 5), also capped by height. */
+  --tile-gap: 6px;
+  --tile: max(36px, min(58px, calc((100vw - 64px) / 5), calc((100dvh - 419px) / 6)));
+  --tile-font: calc(var(--tile) * 0.45);
+  --key-gap: 5px;
+  --key-w: min(33px, calc((100vw - 61px) / 10));
+  --key-h: 52px;
+  --action-w: calc(var(--key-w) * 1.515);
+  --key-font: 16px;
 
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --color-bg: #151412;
-    --color-surface: #1e1c19;
-    --color-surface-raised: #282522;
-    --color-text: #f1ece3;
-    --color-text-muted: #b2aa9c;
-    --color-border: #3a3631;
-    --color-accent: #f08a5d;
-    --color-accent-contrast: #1c1a17;
-    --color-success: #7cc48a;
-    --color-warning: #e7b75a;
-    --color-danger: #ff8a92;
-    --color-focus: #8ab4ff;
-    color-scheme: dark;
+/* Mobile, heights below 700: subtitle hides, tiles drop to 52 */
+@media (max-width: 47.99rem) and (max-height: 699px) {
+  :root {
+    --tile: max(36px, min(52px, calc((100vw - 64px) / 5), calc((100dvh - 384px) / 6)));
   }
 }
 
-:root[data-theme='dark'] {
-  --color-bg: #151412;
-  --color-surface: #1e1c19;
-  --color-surface-raised: #282522;
-  --color-text: #f1ece3;
-  --color-text-muted: #b2aa9c;
-  --color-border: #3a3631;
-  --color-accent: #f08a5d;
-  --color-accent-contrast: #1c1a17;
-  --color-success: #7cc48a;
-  --color-warning: #e7b75a;
-  --color-danger: #ff8a92;
-  --color-focus: #8ab4ff;
-  color-scheme: dark;
+@media (max-width: 47.99rem) and (max-height: 620px) {
+  :root {
+    --key-h: 44px;
+    --tile: max(32px, min(52px, calc((100vw - 64px) / 5), calc((100dvh - 360px) / 6)));
+  }
+}
+
+/* Tablet 768–1199: single column, 60px tiles, desktop keys */
+@media (min-width: 48rem) {
+  :root {
+    --tile-gap: 8px;
+    --tile: max(40px, min(60px, calc((100dvh - 518px) / 6)));
+    --tile-font: calc(var(--tile) * 0.469);
+    --key-gap: 6px;
+    --key-w: 44px;
+    --key-h: 56px;
+    --action-w: 69px;
+    --key-font: 18px;
+  }
+}
+
+/* Desktop ≥ 1200: three columns, 64px tiles */
+@media (min-width: 75rem) {
+  :root {
+    --page-top: clamp(24px, calc(100dvh - 820px), 80px);
+    --tile: max(40px, min(64px, calc((100dvh - 404px - var(--page-top)) / 6)));
+  }
+}
+
+/* High-contrast mode (Figma: Present → orange with ink letters, 3px borders) */
+:root[data-contrast='high'] {
+  --state-present: #ff8a00;
+  --state-present-ink: #0e0f0c;
+  --state-present-line: #b86300;
+  --tile-border: 3px;
 }

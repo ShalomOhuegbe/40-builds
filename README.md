@@ -6,7 +6,7 @@ A design engineering build-in-public challenge: 40 small, carefully crafted proj
 
 | # | Project | Live | Status |
 | --- | --- | --- | --- |
-| 01 | [Word Puzzle](./01-word-puzzle) | — | 🚧 In progress |
+| 01 | [KRAK Word Puzzle](./01-word-puzzle) | Deploy pending | ✅ Built |
 | 02 | [HALO Landing Page](./02-halo-landing) | Deploy pending | ✅ Built |
 | 03 | _TBA_ | — | ⏳ Planned |
 | 04 | _TBA_ | — | ⏳ Planned |
@@ -63,6 +63,10 @@ npm run dev
 ```
 
 Add `--skip-install` to scaffold without running `npm install`.
+
+## One link for everything
+
+All 40 builds live in this repo and deploy together. `npm run build` builds every project folder into `dist/`, with a home page listing them, so each one is served at `/NN-slug/` under the same domain.
 
 **Stack:** Vite · React 18 · TypeScript · Tailwind CSS v4 · Framer Motion · lucide-react · Vercel
 
